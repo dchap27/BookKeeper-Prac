@@ -28,6 +28,9 @@ public class NewBookActivity extends AppCompatActivity {
 
         Button bAdd = findViewById(R.id.bAdd);
         Button bCancel = findViewById(R.id.bCancel);
+        TextView tvLastUpdated = findViewById(R.id.tvxLastUpdated);
+
+        tvLastUpdated.setVisibility(View.INVISIBLE);
 
         mEtAuthor = findViewById(R.id.etAuthorName);
         mEtBook = findViewById(R.id.etBookName);

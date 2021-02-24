@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class SearchResultActivity extends AppCompatActivity implements BookListAdapter.OnDeleteClickListener {
 
     private final String TAG = getClass().getSimpleName();
@@ -73,8 +76,10 @@ public class SearchResultActivity extends AppCompatActivity implements BookListA
             String authorName = data.getStringExtra(EditBookActivity.UPDATED_AUTHOR);
             String bookName = data.getStringExtra(EditBookActivity.UPDATED_BOOK);
             String description = data.getStringExtra(EditBookActivity.UPDATED_DESCRIPTION);
+            Date currentTime = Calendar.getInstance().getTime();
 
-            Book book = new Book(id, authorName, bookName, description);
+            Book book = new Book(id, authorName, bookName, description, currentTime);
+
             mSearchViewModel.update(book);
 
             Toast.makeText(this, R.string.updated, Toast.LENGTH_SHORT).show();

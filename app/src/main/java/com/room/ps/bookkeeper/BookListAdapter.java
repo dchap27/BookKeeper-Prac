@@ -11,10 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHolder> {
 
@@ -44,7 +48,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Book book = mBookList.get(position);
-        holder.setData(book.getAuthor(), book.getBook(), position);
+        holder.setData(book.getBook(), book.getLastUpdated(), position);
         holder.setListeners();
     }
 
@@ -60,8 +64,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private int pos = 0;
-        TextView tvAuthor = itemView.findViewById(R.id.tvAuthor);
+//        TextView tvAuthor = itemView.findViewById(R.id.tvAuthor);
         TextView tvBook = itemView.findViewById(R.id.tvBook);
+        TextView tvLastUpdated = itemView.findViewById(R.id.tvLastUpdated);
         ImageView ivRowDelete = itemView.findViewById(R.id.image_action_delete);
         CardView cardView = itemView.findViewById(R.id.cardView);
 
@@ -69,8 +74,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
             super(itemView);
         }
 
-        public void setData(String author, String book, int position) {
-            tvAuthor.setText(author);
+        public void setData(String book, @Nullable Date lastUpdated, int position) {
+//            tvAuthor.setText(author);
+            tvLastUpdated.setText(getFormattedDate(lastUpdated));
             tvBook.setText(book);
             this.pos = position;
         }
@@ -84,6 +90,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
                     intent.putExtra("author", mBookList.get(pos).getAuthor());
                     intent.putExtra("book", mBookList.get(pos).getBook());
                     intent.putExtra("book_description", mBookList.get(pos).getDescription());
+                    intent.putExtra("lastUpdated", getFormattedDate(mBookList.get(pos).getLastUpdated()));
                     ((Activity) mContext).startActivityForResult(intent, MainActivity.UPDATE_BOOK_ACTIVITY_REQUEST_CODE);
                 }
             });
@@ -94,6 +101,17 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
                     onDeleteClickListener.onDeleteClickListener(mBookList.get(pos));
                 }
             });
+        }
+        private String getFormattedDate(Date lastUpdated) {
+            String time = "Last Update: ";
+            if((lastUpdated) != null){
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm d MMM, yyyy", Locale.getDefault());
+                sdf.format(lastUpdated);
+                time += lastUpdated;
+            } else {
+                time = "NOT FOUND";
+            }
+            return time;
         }
     }
 }

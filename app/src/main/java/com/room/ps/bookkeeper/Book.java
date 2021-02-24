@@ -1,8 +1,12 @@
 package com.room.ps.bookkeeper;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.util.Date;
 
 @Entity(tableName = "books")
 public class Book {
@@ -17,11 +21,16 @@ public class Book {
 
     private String description;
 
-    public Book(String id, String author, String book, String description) {
+    @ColumnInfo(name = "last_updated")
+    @Nullable
+    private Date lastUpdated;
+
+    public Book(String id, String author, String book, String description, Date lastUpdated) {
         this.id = id;
         this.author = author;
         this.book = book;
         this.description= description;
+        this.lastUpdated = lastUpdated;
     }
 
     public String getId() {
@@ -42,6 +51,10 @@ public class Book {
 
     public String getBook() {
         return book;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
     }
 
     public void setBook(String book) {

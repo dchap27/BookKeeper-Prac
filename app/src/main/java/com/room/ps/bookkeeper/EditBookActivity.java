@@ -21,6 +21,7 @@ public class EditBookActivity extends AppCompatActivity {
     private TextView mEtAuthor;
     private TextView mEtBook;
     private EditText mEtDescription;
+    private TextView mTvxlastUpdated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class EditBookActivity extends AppCompatActivity {
         mEtAuthor = findViewById(R.id.etAuthorName);
         mEtBook = findViewById(R.id.etBookName);
         mEtDescription = findViewById(R.id.etDescription);
+        mTvxlastUpdated = findViewById(R.id.tvxLastUpdated);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
@@ -40,10 +42,13 @@ public class EditBookActivity extends AppCompatActivity {
             String book = bundle.getString("book");
             String author = bundle.getString("author");
             String description = bundle.getString("book_description");
+            String lastUpdated = bundle.getString("lastUpdated");
 
             mEtAuthor.setText(author);
             mEtBook.setText(book);
             mEtDescription.setText(description);
+            mTvxlastUpdated.setText(lastUpdated);
+
         }
 
         bSave.setOnClickListener(new View.OnClickListener() {

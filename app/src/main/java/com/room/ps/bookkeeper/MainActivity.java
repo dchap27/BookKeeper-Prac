@@ -23,6 +23,8 @@ import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity implements BookListAdapter.OnDeleteClickListener {
@@ -78,8 +80,9 @@ public class MainActivity extends AppCompatActivity implements BookListAdapter.O
             String authorName = data.getStringExtra(NEW_AUTHOR);
             String bookName = data.getStringExtra(NEW_BOOK);
             String description = data.getStringExtra(NEW_DESCRIPTION);
+            Date currentTime = Calendar.getInstance().getTime();
 
-            Book book = new Book(id, authorName, bookName, description);
+            Book book = new Book(id, authorName, bookName, description, currentTime);
 
             mBookViewModel.insert(book);
             Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
@@ -88,8 +91,9 @@ public class MainActivity extends AppCompatActivity implements BookListAdapter.O
             String authorName = data.getStringExtra(EditBookActivity.UPDATED_AUTHOR);
             String bookName = data.getStringExtra(EditBookActivity.UPDATED_BOOK);
             String description = data.getStringExtra(EditBookActivity.UPDATED_DESCRIPTION);
+            Date currentTime = Calendar.getInstance().getTime();
 
-            Book book = new Book(id, authorName, bookName, description);
+            Book book = new Book(id, authorName, bookName, description, currentTime);
             mBookViewModel.update(book);
 
             Toast.makeText(this, R.string.updated, Toast.LENGTH_SHORT).show();
