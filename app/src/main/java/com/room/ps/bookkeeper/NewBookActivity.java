@@ -8,15 +8,18 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import static com.room.ps.bookkeeper.MainActivity.NEW_AUTHOR;
 import static com.room.ps.bookkeeper.MainActivity.NEW_BOOK;
+import static com.room.ps.bookkeeper.MainActivity.NEW_DESCRIPTION;
 
 public class NewBookActivity extends AppCompatActivity {
 
     private TextView mEtAuthor;
     private TextView mEtBook;
+    private EditText mEtDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class NewBookActivity extends AppCompatActivity {
 
         mEtAuthor = findViewById(R.id.etAuthorName);
         mEtBook = findViewById(R.id.etBookName);
+        mEtDescription = findViewById(R.id.etDescription);
 
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,9 +43,11 @@ public class NewBookActivity extends AppCompatActivity {
                 } else {
                     String author = mEtAuthor.getText().toString();
                     String book = mEtBook.getText().toString();
+                    String description = mEtDescription.getText().toString();
 
                     resultIntent.putExtra(NEW_AUTHOR, author);
                     resultIntent.putExtra(NEW_BOOK, book);
+                    resultIntent.putExtra(NEW_DESCRIPTION, description);
                     setResult(Activity.RESULT_OK, resultIntent);
                 }
                 finish();

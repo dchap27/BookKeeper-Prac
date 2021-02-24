@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements BookListAdapter.O
     private static final int NEW_BOOK_ACTIVITY_REQUEST_CODE = 1;
     public static final String NEW_AUTHOR = "com.room.ps.bookkeeper.NEW_AUTHOR";
     public static final String NEW_BOOK = "com.room.ps.bookkeeper.NEW_BOOK";
+    public static final String NEW_DESCRIPTION = "com.room.ps.bookkeeper.NEW_DESCRIPTION";
     private BookViewModel mBookViewModel;
     private RecyclerView mRecyclerView;
     private BookListAdapter mRecyclerAdapter;
@@ -76,8 +77,9 @@ public class MainActivity extends AppCompatActivity implements BookListAdapter.O
             String id = UUID.randomUUID().toString();
             String authorName = data.getStringExtra(NEW_AUTHOR);
             String bookName = data.getStringExtra(NEW_BOOK);
+            String description = data.getStringExtra(NEW_DESCRIPTION);
 
-            Book book = new Book(id, authorName, bookName);
+            Book book = new Book(id, authorName, bookName, description);
 
             mBookViewModel.insert(book);
             Toast.makeText(this, R.string.saved, Toast.LENGTH_SHORT).show();
@@ -85,8 +87,9 @@ public class MainActivity extends AppCompatActivity implements BookListAdapter.O
             String id = data.getStringExtra(EditBookActivity.ID);
             String authorName = data.getStringExtra(EditBookActivity.UPDATED_AUTHOR);
             String bookName = data.getStringExtra(EditBookActivity.UPDATED_BOOK);
+            String description = data.getStringExtra(EditBookActivity.UPDATED_DESCRIPTION);
 
-            Book book = new Book(id, authorName, bookName);
+            Book book = new Book(id, authorName, bookName, description);
             mBookViewModel.update(book);
 
             Toast.makeText(this, R.string.updated, Toast.LENGTH_SHORT).show();

@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -61,7 +63,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
         TextView tvAuthor = itemView.findViewById(R.id.tvAuthor);
         TextView tvBook = itemView.findViewById(R.id.tvBook);
         ImageView ivRowDelete = itemView.findViewById(R.id.image_action_delete);
-        ImageView ivRowEdit = itemView.findViewById(R.id.image_action_edit);
+        CardView cardView = itemView.findViewById(R.id.cardView);
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,13 +76,14 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
         }
 
         public void setListeners() {
-            ivRowEdit.setOnClickListener(new View.OnClickListener() {
+            cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, EditBookActivity.class);
                     intent.putExtra("id", mBookList.get(pos).getId());
                     intent.putExtra("author", mBookList.get(pos).getAuthor());
                     intent.putExtra("book", mBookList.get(pos).getBook());
+                    intent.putExtra("book_description", mBookList.get(pos).getDescription());
                     ((Activity) mContext).startActivityForResult(intent, MainActivity.UPDATE_BOOK_ACTIVITY_REQUEST_CODE);
                 }
             });

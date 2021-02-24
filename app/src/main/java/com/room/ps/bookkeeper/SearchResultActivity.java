@@ -72,8 +72,9 @@ public class SearchResultActivity extends AppCompatActivity implements BookListA
             String id = data.getStringExtra(EditBookActivity.ID);
             String authorName = data.getStringExtra(EditBookActivity.UPDATED_AUTHOR);
             String bookName = data.getStringExtra(EditBookActivity.UPDATED_BOOK);
+            String description = data.getStringExtra(EditBookActivity.UPDATED_DESCRIPTION);
 
-            Book book = new Book(id, authorName, bookName);
+            Book book = new Book(id, authorName, bookName, description);
             mSearchViewModel.update(book);
 
             Toast.makeText(this, R.string.updated, Toast.LENGTH_SHORT).show();

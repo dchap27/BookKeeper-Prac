@@ -1,7 +1,6 @@
 package com.room.ps.bookkeeper;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -12,15 +11,17 @@ public class Book {
     @PrimaryKey
     private String id;
 
-    @ColumnInfo(name="author")
     private String author;
 
     private String book;
 
-    public Book(String id, String author, String book) {
+    private String description;
+
+    public Book(String id, String author, String book, String description) {
         this.id = id;
         this.author = author;
         this.book = book;
+        this.description= description;
     }
 
     public String getId() {
@@ -45,5 +46,13 @@ public class Book {
 
     public void setBook(String book) {
         this.book = book;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
